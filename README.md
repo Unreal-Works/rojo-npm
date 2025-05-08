@@ -1,2 +1,45 @@
 # rojo-npm
-Use Rojo with NPM
+
+A Node.js wrapper for Rojo that allows you to install and use Rojo through NPM.
+
+## Installation
+
+```bash
+npm install -g rojo-npm
+```
+
+Or install locally in your project:
+
+```bash
+npm install rojo-npm
+```
+
+## Usage
+
+If installed globally, you can use Rojo commands directly:
+
+```bash
+rojo init
+rojo serve
+rojo build
+```
+
+If installed locally, you can use it through npx:
+
+```bash
+npx rojo init
+npx rojo serve
+npx rojo build
+```
+
+The package will automatically download the appropriate Rojo binary for your platform (Windows, macOS, or Linux) on first use.
+
+## Supported Platforms
+
+- Windows (x64)
+- macOS (x64, ARM64)
+- Linux (x64)
+
+## License
+
+MIT
