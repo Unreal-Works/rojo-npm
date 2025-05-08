@@ -13,7 +13,15 @@ class ProcessError extends Error {
 export async function getBinaryPath() {
     const folderPath = path.join(__dirname, "..", "bin", process.platform);
     const files = await fs.readdir(folderPath, { withFileTypes: true });
-    const binaryName = process.platform === 'win32' ? 'rojo.exe' : 'rojo';
+    let binaryName: string;
+    switch (process.platform) {
+        case 'win32':
+            binaryName = "rojo.exe";
+            break;
+        default:
+            binaryName = "rojo";
+            break;
+    }
     const binary = files.find(file => file.isFile() && file.name.includes(binaryName));
     return binary ? path.join(folderPath, binary.name) : null;
 }

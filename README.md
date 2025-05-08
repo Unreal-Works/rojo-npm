@@ -32,8 +32,6 @@ npx rojo serve
 npx rojo build
 ```
 
-The package will automatically download the appropriate Rojo binary for your platform (Windows, macOS, or Linux) on first use.
-
 ## Supported Platforms
 
 - Windows (x64)

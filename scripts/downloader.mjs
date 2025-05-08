@@ -14,8 +14,8 @@ function getLatestReleaseUrl() {
 // Fetch latest release data
 const response = await fetch(getLatestReleaseUrl());
 const data = await response.json();
-const rojoVersion = data.tag_name.replace(/^v/, ''); // Remove 'v' prefix if present
-console.log(`Downloading Rojo version: ${rojoVersion}`);
+const version = data.tag_name.replace(/^v/, ''); // Remove 'v' prefix if present
+console.log(`Downloading version: ${version}`);
 
 const assets = new Map();
 
@@ -36,7 +36,7 @@ const streamPipeline = promisify(pipeline);
 for (const [platform, asset] of assets) {
     const downloadResponse = await fetch(asset.browser_download_url);
     if (!downloadResponse.ok) {
-        throw new Error(`Failed to download Rojo: ${downloadResponse.statusText}`);
+        throw new Error(`Failed to download: ${downloadResponse.statusText}`);
     }
 
     const binPath = path.join(destPath, platform) + ".zip";
@@ -51,12 +51,10 @@ for (const [platform, asset] of assets) {
 
 // Write version info to a file for reference
 const versionInfo = {
-    rojoVersion,
+    version,
     downloadedAt: new Date().toISOString()
 };
 fs.writeFileSync(
     path.join(destPath, 'version.json'), 
     JSON.stringify(versionInfo, null, 2)
 );
-
-console.log(`Successfully downloaded Rojo ${rojoVersion} for all platforms`);
