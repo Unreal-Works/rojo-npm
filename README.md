@@ -5,13 +5,13 @@ A Node.js wrapper for Rojo that allows you to install and use Rojo through NPM.
 ## Installation
 
 ```bash
-npm install -g rojo-npm
+npm install -g rojo
 ```
 
 Or install locally in your project:
 
 ```bash
-npm install rojo-npm
+npm install rojo
 ```
 
 ## Usage
