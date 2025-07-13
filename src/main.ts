@@ -30,6 +30,15 @@ export async function main() {
     const binaryPath = await getBinaryPath();
     const args = process.argv.slice(2);
 
+    // Automatically set executable permissions for non-Windows platforms
+    if (binaryPath && process.platform !== 'win32') {
+        try {
+            await fs.chmod(binaryPath, 0o755);
+        } catch (err) {
+            // Ignore errors if chmod fails, will be caught on spawn
+        }
+    }
+
     return await new Promise<void>((resolve, reject) => {
         if (!binaryPath) {
             reject(new Error('Binary path is undefined'));
