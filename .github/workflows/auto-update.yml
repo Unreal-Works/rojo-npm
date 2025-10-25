@@ -50,9 +50,12 @@ jobs:
       - name: Update package version
         if: env.UPDATE_NEEDED == 'true'
         run: |
+          # Use a prerelease hyphen instead of build metadata so npm preserves the
+          # version (npm removes +build metadata during publish validation).
           WRAPPER_VERSION=$(echo "$CURRENT_VERSION" | cut -d'+' -f1)
-          NEW_VERSION="${WRAPPER_VERSION}+rojo${LATEST_VERSION}"
+          NEW_VERSION="${WRAPPER_VERSION}-rojo${LATEST_VERSION}"
           node -e "
+            const fs = require('fs');
             const pkg = require('./package.json');
             pkg.version = '$NEW_VERSION';
             fs.writeFileSync('./package.json', JSON.stringify(pkg, null, 2) + '\n');
