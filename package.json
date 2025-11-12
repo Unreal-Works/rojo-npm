@@ -1,6 +1,6 @@
 {
   "name": "rojo",
-  "version": "1.0.2-rojo7.6.1-rojo7.6.1-rojo7.6.1-rojo7.6.1",
+  "version": "1.0.3-rojo7.6.1",
   "description": "Rojo on NPM. Usage: `npx rojo`",
   "main": "dist/main.js",
   "bin": {
