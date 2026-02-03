@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Unreal-Works/rojo-npm.git"
+    "url": "git+https://github.com/Unreal-Works/rojo-npm.git"
   },
   "homepage": "https://github.com/Unreal-Works/rojo-npm/README.md",
   "bugs": {
