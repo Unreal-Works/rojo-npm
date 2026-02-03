@@ -8,12 +8,13 @@ import { promisify } from 'util';
 const destPath = "bin";
 
 function getLatestReleaseUrl() {
-    return 'https://api.github.com/repos/rojo-rbx/rojo/releases/latest';
+    return 'https://api.github.com/repos/rojo-rbx/rojo/releases';
 }
 
 // Fetch latest release data
 const response = await fetch(getLatestReleaseUrl());
-const data = await response.json();
+const releases = await response.json();
+const data = releases.sort((a, b) => new Date(b.published_at) - new Date(a.published_at))[0];
 const version = data.tag_name.replace(/^v/, ''); // Remove 'v' prefix if present
 console.log(`Downloading version: ${version}`);
 
