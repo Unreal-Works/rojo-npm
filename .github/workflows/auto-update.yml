@@ -30,7 +30,7 @@ jobs:
       - name: Fetch latest Rojo version
         id: rojo-version
         run: |
-          LATEST_VERSION=$(curl -s https://api.github.com/repos/rojo-rbx/rojo/releases/latest | jq -r '.tag_name' | sed 's/^v//')
+          LATEST_VERSION=$(curl -s https://api.github.com/repos/rojo-rbx/rojo/releases | jq -r 'sort_by(.published_at) | reverse | .[0].tag_name' | sed 's/^v//')
           echo "LATEST_VERSION=$LATEST_VERSION" >> $GITHUB_ENV
           CURRENT_VERSION=$(node -e "console.log(require('./package.json').version)")
           CURRENT_ROJO_VERSION=$(node -e "console.log(require('./package.json').version.split('-rojo')[1] || '')")
