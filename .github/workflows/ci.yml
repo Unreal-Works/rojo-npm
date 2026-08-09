@@ -1,0 +1,37 @@
+on:
+  push:
+    branches: ["main", "master"]
+  pull_request:
+    branches: ["main", "master"]
+
+jobs:
+  test:
+    name: Build and Test on ${{ matrix.os }} (Node ${{ matrix.node-version }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [20.x, 22.x, 24.x]
+        os: [ubuntu-latest, windows-latest, macos-latest]
+
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - uses: actions/checkout@v7
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+      - run: npm ci
+      - run: npx prettier --check .
+      - run: npm test
+
+      - name: Authenticate Rokit
+        shell: bash
+        run: npx rokit authenticate github --token "$GITHUB_TOKEN" --skip-verify
+
+      - name: Smoke test CLI
+        run: |
+          npx rojo --version
