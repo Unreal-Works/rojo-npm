@@ -2,6 +2,8 @@
 
 A Node.js wrapper for Rojo that allows you to install and use Rojo through NPM.
 
+You should prefer [rkkit](https://github.com/evilbocchi/rkkit) if you would rather use Rokit in NPM.
+
 ## Installation
 
 ```bash
@@ -31,12 +33,6 @@ npx rojo init
 npx rojo serve
 npx rojo build
 ```
-
-## Supported Platforms
-
-- Windows (x64)
-- macOS (x64, ARM64)
-- Linux (x64)
 
 ## License
 
