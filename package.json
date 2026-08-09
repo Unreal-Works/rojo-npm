@@ -27,9 +27,11 @@
     ],
     "scripts": {
         "format": "prettier --write .",
-        "test": "node test/index.test.js"
+        "test": "node test/index.test.js",
+        "prepare": "lefthook install"
     },
     "devDependencies": {
+        "lefthook": "^2.1.10",
         "prettier": "^3.9.6"
     },
     "dependencies": {
