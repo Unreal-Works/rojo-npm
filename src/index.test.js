@@ -6,7 +6,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import test from "node:test";
 
-const cliPath = fileURLToPath(new URL("../index.js", import.meta.url));
+const cliPath = fileURLToPath(new URL("./index.js", import.meta.url));
 const projectRoot = path.dirname(cliPath);
 
 const skip = process.env.ROJO_NPM_SKIP_CLI_TESTS === "1";

@@ -28,7 +28,7 @@ jobs:
 
       - name: Authenticate Rokit
         shell: bash
-        run: npx rokit authenticate github --token "$GITHUB_TOKEN" --skip-verify
+        run: node src/rokit.js authenticate github --token "$GITHUB_TOKEN" --skip-verify
 
       - name: Run tests
         run: npm test
