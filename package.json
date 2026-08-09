@@ -35,6 +35,7 @@
         "prettier": "^3.9.6"
     },
     "dependencies": {
-        "@unrealworks/rkkit-core": "^0.3.0"
+        "@unrealworks/rkkit-core": "^0.3.0",
+        "es-main": "^1.4.0"
     }
 }
