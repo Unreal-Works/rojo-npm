@@ -1,6 +1,6 @@
 {
     "name": "rojo",
-    "version": "1.0.3-rojo7.7.0",
+    "version": "2.0.0",
     "description": "Rojo on NPM. Usage: `npx rojo`",
     "type": "module",
     "main": "index.js",
