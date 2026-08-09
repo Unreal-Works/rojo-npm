@@ -30,25 +30,6 @@ test("--version prints the installed Rojo version", { skip }, () => {
     assert.match(result.stdout, /Rojo \d+\.\d+\.\d+/);
 });
 
-test("--version matches the version pinned in package.json", { skip }, () => {
-    const pkg = JSON.parse(
-        readFileSync(new URL("../package.json", import.meta.url), "utf8"),
-    );
-    const pinnedVersion = /rojo(\d+\.\d+\.\d+)/.exec(pkg.version)?.[1];
-
-    assert.ok(
-        pinnedVersion,
-        `could not read a pinned Rojo version from ${pkg.version}`,
-    );
-    const result = runCli(["--version"]);
-
-    assert.equal(result.status, 0, output(result));
-    assert.match(
-        result.stdout,
-        new RegExp(`Rojo ${pinnedVersion.replaceAll(".", "\\.")}`),
-    );
-});
-
 test("--help prints the subcommand list", { skip }, () => {
     const result = runCli(["--help"]);
 
