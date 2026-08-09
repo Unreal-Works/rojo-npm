@@ -26,7 +26,8 @@
         "cli"
     ],
     "scripts": {
-        "format": "prettier --write ."
+        "format": "prettier --write .",
+        "test": "node test/index.test.js"
     },
     "devDependencies": {
         "prettier": "^3.9.6"
