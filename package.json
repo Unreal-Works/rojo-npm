@@ -1,7 +1,7 @@
 {
     "name": "rojo",
     "version": "2.0.0",
-    "description": "Rojo on NPM. Usage: `npx rojo`",
+    "description": "`npx rojo` Rojo enables Roblox developers to use professional-grade software engineering tools.",
     "type": "module",
     "main": "src/index.js",
     "bin": {
