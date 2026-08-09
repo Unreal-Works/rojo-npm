@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { spawnSync } from "node:child_process";
-import { mkdtempSync, readFileSync, rmSync } from "node:fs";
+import { mkdtempSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -29,6 +29,36 @@ test("--version prints the installed Rojo version", { skip }, () => {
     assert.equal(result.status, 0, output(result));
     assert.match(result.stdout, /Rojo \d+\.\d+\.\d+/);
 });
+
+test(
+    "rokit.toml Rojo version takes precedence over the global version",
+    { skip },
+    () => {
+        const dir = mkdtempSync(path.join(tmpdir(), "rojo-npm-"));
+        const configuredVersion = "7.6.1";
+        try {
+            const fallbackResult = runCli(["--version"], { cwd: dir });
+            assert.equal(fallbackResult.status, 0, output(fallbackResult));
+            assert.match(fallbackResult.stdout, /Rojo \d+\.\d+\.\d+/);
+
+            writeFileSync(
+                path.join(dir, "rokit.toml"),
+                `[tools]\nrojo = "rojo-rbx/rojo@${configuredVersion}"\n`,
+            );
+
+            const configuredResult = runCli(["--version"], { cwd: dir });
+
+            assert.equal(configuredResult.status, 0, output(configuredResult));
+            assert.match(
+                configuredResult.stdout,
+                new RegExp(`Rojo ${configuredVersion.replaceAll(".", "\\.")}`),
+            );
+            assert.notEqual(configuredResult.stdout, fallbackResult.stdout);
+        } finally {
+            rmSync(dir, { recursive: true, force: true });
+        }
+    },
+);
 
 test("--help prints the subcommand list", { skip }, () => {
     const result = runCli(["--help"]);
