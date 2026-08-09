@@ -1,7 +1,9 @@
+/// <reference types="node" />
+/// <reference types="jest" />
 import { spawn } from "child_process";
 import fs from "fs/promises";
 import path from "path";
-import * as main from "../src/main";
+import * as main from "./main";
 
 // Mock the modules we depend on
 jest.mock("child_process", () => ({
