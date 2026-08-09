@@ -6,7 +6,7 @@ on:
 
 jobs:
   test:
-    name: Build and Test on ${{ matrix.os }} (Node ${{ matrix.node-version }})
+    name: Test on ${{ matrix.os }} (Node ${{ matrix.node-version }})
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -26,11 +26,13 @@ jobs:
           cache: "npm"
       - run: npm ci
       - run: npx prettier --check .
-      - run: npm test
 
       - name: Authenticate Rokit
         shell: bash
         run: npx rokit authenticate github --token "$GITHUB_TOKEN" --skip-verify
+
+      - name: Run tests
+        run: npm test
 
       - name: Smoke test CLI
         run: |
