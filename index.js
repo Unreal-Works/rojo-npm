@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { logger, rkCommandHandlerSync } from "rkkit";
+import { logger, rkCommandHandlerSync } from "@unrealworks/rkkit-core";
 
 logger.setLogLevel("error");
 const result = await rkCommandHandlerSync({
